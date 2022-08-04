@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital clock</title>
+<style>
+body{
+	margin:0;
+	padding:0;
+	background-color:black;
+}
+
+table{
+    position:relative;
+	top:100px;
+	font-family: Arial, Helvetica , sans-serif;
+	color:white;
+	font-weight:bold;
+	font-size:55px;
+}
+</style>
+</head>
+<body>
+<table align="center">
+
+<tr> <td align="center"> <span style="font-size:50px;">Time</span> </td> </tr>
+<tr> <td align="center"> <span class="changeC"id="hours" onclick="dFault()">00</span>
+<span>:</span>
+<span class="changeC"id="minutes" onclick="cColor()">00</span>
+<span>:</span>
+<span class="changeC"id="seconds">00</span>
+<span id="session">AM</span> </td> </tr>
+<tr><td align="center"><span style="font-size:50px;">Date</span> <br></td> </tr>
+<tr> <td align="center"><span id="date-day"></span>
+<span>:</span>
+<span id="months"></span>
+<span>:</span>
+<span id="years"></span></td> </tr>
+
+<tr> <td align="center"><span id="day"></span> <br> <br></td> </tr>
+<!--tr> <td align="center"> <span style="font-size:50px;">Time</span> </tr> </td><br>
+<tr> <td align="center"> <span class="changeC"id="hours" onclick="dFault()">00</span>
+<span>:</span>
+<span class="changeC"id="minutes" onclick="cColor()">00</span>
+<span>:</span>
+<span class="changeC"id="seconds">00</span>
+<span id="session">AM</span> </td> </tr-->
+</table>
+<script>
+
+let vMinutes = document.querySelector('#minutes')
+//vMinutes.addEventListener('click', function(){
+let i = 0;
+function cColor(){
+let vHours = document.querySelector('#hours')
+let vSeconds = document.querySelector('#seconds')
+//vHours.style.color="yellow"
+//vMinutes.style.color="yellow"
+//vSeconds.style.color="yellow"
+let colors = ["yellow" , "blue", "limegreen", "red", "orange" , "white"]
+
+//sfor (i = 0; i < colors.length; i++){
+if (vHours.style.color == "orange" && vMinutes.style.color =="orange" && vSeconds.style.color =="orange"){
+ return;
+ }
+vHours.style.color = colors[i]
+vMinutes.style.color = colors[i]
+vSeconds.style.color = colors[i]
+ i = (i + 1) % colors.length;
+ 
+//alert('i changes the color')
+}
+
+setInterval(cColor , 10000);
+
+let index = 0
+function dFault(){
+let vMinutes = document.querySelector('#minutes')
+let vHours = document.querySelector('#hours')
+let vSeconds = document.querySelector('#seconds')
+
+let col = ["white"]
+vHours.style.color = col[index]
+vMinutes.style.color = col[index]
+vSeconds.style.color = col[index]
+ i = (i + 1) % col.length;
+}
+
+setInterval(dFault , 10000);
+function weFunction(white){
+document.body.style.background=white;
+vdiv=document.querySelector('.container')
+vdiv.style.color="black"
+}
+
+function displayTime() {
+	let dateTime = new Date();
+	let dy = dateTime.getDate();
+	let mont=dateTime.getMonth() + 1;
+	let yr = dateTime.getFullYear();
+	let hrs=dateTime.getHours();
+	let min=dateTime.getMinutes();
+	let sec=dateTime.getSeconds();
+	let session = document.getElementById('session');
+    
+	let day = dateTime.getDay()
+	
+	switch(day)
+	{
+	 case 0:
+	  day = "Sunday"
+	  break;
+	   case 1:
+	  day = "Monday"
+	  break;
+	   case 2:
+	  day = "Tuesday"
+	  break;
+	   case 3:
+	  day = "Wednesday"
+	  break;
+	   case 4:
+	  day = "Thursday"
+	  break;
+	   case 5:
+	  day = "Friday"
+	  break;
+	   case 6:
+	  day = "Saturday"
+	  break;
+	}
+	if (hrs >=12){
+		session.innerHTML="PM";
+	}
+	else {
+		session.innerHTML="AM";
+	}
+	
+	
+	if (hrs >12){
+		hrs= hrs - 12
+	}
+	
+	if (dy < 10){
+		document.getElementById('date-day').innerHTML="0" + dy;
+	}
+	else if (dy >=10)  {
+		document.getElementById('date-day').innerHTML=dy;
+	}
+	
+	if (mont < 10){
+    document.getElementById('months').innerHTML="0" + mont;
+	}
+	else if (mont >=10)  {
+		document.getElementById('months').innerHTML=mont
+	}
+	
+	document.getElementById('years').innerHTML=yr;
+	
+	document.getElementById('hours').innerHTML=hrs;
+	document.getElementById('minutes').innerHTML=min;
+	document.getElementById('seconds').innerHTML=sec;
+	document.getElementById('day').innerHTML = day
+}
+setInterval(displayTime)
+</script>
+</body>
+</html
